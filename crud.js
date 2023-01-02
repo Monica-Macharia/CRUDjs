@@ -16,4 +16,4 @@ function displayFunction(data){
 
 fetch('http://localhost:3000/animals')
 .then(response => response.json())
-.then(data => data.forEach(item => displayFunction(item)))
+.then(data => data.map(item => displayFunction(item)))
