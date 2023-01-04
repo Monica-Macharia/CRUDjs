@@ -7,7 +7,10 @@ function displayFunction(data){
     let divi = document.createElement("div")
     divi.innerHTML = 
     `<img src = ${data.image}>
-    <p>Name: ${data.name}</p>`
+    <p class="add">Donations: ${data.donations}</p>
+    <p>Name: ${data.name}</p>
+    <button class="donate">Donate $30</button>
+    <button>Delete</button>`
     console.log(data)
 
     let newDiv = location.appendChild(divi)
@@ -96,3 +99,16 @@ function fetcher(additionObj){
 
     })
 }
+
+
+//PATCH (UPDATING A FEATURE)
+//Add an event listener to the update button.
+//once clicked add 10 dollars to the donations text
+//use PATCH to persist the change to the database
+
+let donations = document.querySelector("button.donate")
+console.log(donations)
+    donations.addEventListener("click", function(){
+       console.log( document.querySelector(".add"))
+        
+    })
