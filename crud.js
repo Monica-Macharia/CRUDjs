@@ -7,7 +7,6 @@ function displayFunction(data){
     let divi = document.createElement("div")
     divi.innerHTML = 
     `<img src = ${data.image}>
-    <p>Id: ${data.id}</p>
     <p>Name: ${data.name}</p>`
     console.log(data)
 
@@ -19,7 +18,7 @@ fetch('http://localhost:3000/animals')
 .then(response => response.json())
 .then(data => data.map(item => displayFunction(item)))
 
-//task
+//task - SEARCH FEATURE
 //place an eventlistener on form submit button
 //grab the incoming value
 //customize fetch to the incoming value
@@ -48,3 +47,30 @@ function searcher(){
     
 }
 searcher();
+
+
+//task POST FEATURE
+//PSEDOCODE
+//grab elements coming from the form
+//and add them to DOM display function
+//post them to the database
+
+
+function poster(){
+    let postingForm = document.querySelector("form#post")
+    
+    postingForm.addEventListener("submit", function(e){
+        e.preventDefault()
+        let names = document.querySelector("input#new").value
+        let image = document.querySelector("input#images").value
+        let additionObj = {
+            name: names,
+            image: image
+        }
+        displayFunction(additionObj)
+        
+    })
+  
+
+}
+poster();
