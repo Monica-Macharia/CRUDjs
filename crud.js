@@ -28,7 +28,7 @@ fetch('http://localhost:3000/animals')
 //step1 add a eventlistener, prevent default
 
 function searcher(){
-    document.querySelector("form").addEventListener("submit", function(e){
+    document.querySelector("form#filter").addEventListener("submit", function(e){
         e.preventDefault();
         let input = document.querySelector("input#search").value
         console.log(input)

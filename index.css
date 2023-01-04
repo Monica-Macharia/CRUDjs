@@ -10,8 +10,12 @@ div#new{
     font-size: 17px;
 
 }
+form#post{
+    margin-left: 5px;
+}
 form{
     padding-bottom: 5%;
+    margin-left: 1.5px;
 }
 div#data{
     padding-top: 1%;
