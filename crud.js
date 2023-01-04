@@ -79,7 +79,7 @@ searcher();
 
 function fetcher(additionObj){
     const configurationObject ={
-        method: "POST",
+       method: "POST",
         headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -90,4 +90,9 @@ function fetcher(additionObj){
     fetch("http://localhost:3000/animals", configurationObject)
     .then(response => response.json())
     .then(data => console.log(data))
+    .catch(error => {
+        alert("something went wrong!")
+        console.log(error.message)
+
+    })
 }
