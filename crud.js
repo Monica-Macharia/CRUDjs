@@ -56,7 +56,7 @@ searcher();
 //post them to the database
 
 
-function poster(){
+
     let postingForm = document.querySelector("form#post")
     
     postingForm.addEventListener("submit", function(e){
@@ -68,9 +68,26 @@ function poster(){
             image: image
         }
         displayFunction(additionObj)
+        fetcher(additionObj)
         
-    })
-  
 
+    })
+        
+
+
+
+
+function fetcher(additionObj){
+    const configurationObject ={
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        },
+        body: JSON.stringify(additionObj)
+    }
+
+    fetch("http://localhost:3000/animals", configurationObject)
+    .then(response => response.json())
+    .then(data => console.log(data))
 }
-poster();
