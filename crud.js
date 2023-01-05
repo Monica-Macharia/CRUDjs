@@ -2,25 +2,63 @@
 //function that does GET request and pushes the data into a display function using a ,map or .forEah.
 //display function that pushes the data to a specific location on the DOM.
 
+
+
+
 function displayFunction(data){
-    let location = document.querySelector("#data")
+    
+    const location = document.querySelector("#data")
     let divi = document.createElement("div")
     divi.innerHTML = 
     `<img src = ${data.image}>
-    <p class="add">Donations: ${data.donations}</p>
+    <p class="add">Donations: $${data.donations}</p>
     <p>Name: ${data.name}</p>
     <button class="donate">Donate $30</button>
     <button>Delete</button>`
-    console.log(data)
-    console.log(divi.donate)
+    // console.log(data)
+    // console.log(divi.children[3])
 
-    let newDiv = location.appendChild(divi)
-    console.log(newDiv)
+    
+    
+    const newDiv = location.appendChild(divi)
+    // console.log(newDiv)
+   
+
+    const click = divi.querySelector(".donate")
+    // console.log(click)
+
+    click.addEventListener("click", function(){
+        if(data.donations === null){
+            data.donations = 0
+        }else if(data.donations === undefined){
+            data.donations = 0
+        }else if(data.donations === NaN) {
+            data.donations = 0
+        }
+        data.donations += 30
+        divi.querySelector(".add").innerText = `Donations: $${data.donations}` 
+       updater(data)
+        
+        
+            
+        
+
+
+
+
+    })
+
+    
 }
+
 
 fetch('http://localhost:3000/animals')
 .then(response => response.json())
 .then(data => data.map(item => displayFunction(item)))
+
+
+
+
 
 //task - SEARCH FEATURE
 //place an eventlistener on form submit button
@@ -30,7 +68,7 @@ fetch('http://localhost:3000/animals')
 
 //step1 add a eventlistener, prevent default
 
-function searcher(){
+
     document.querySelector("form#filter").addEventListener("submit", function(e){
         e.preventDefault();
         let input = document.querySelector("input#search").value
@@ -49,8 +87,7 @@ function searcher(){
     })
 
     
-}
-searcher();
+
 
 
 //task POST FEATURE
@@ -103,13 +140,22 @@ function fetcher(additionObj){
 
 
 //PATCH (UPDATING A FEATURE)
-//Add an event listener to the update button.
-//once clicked add 10 dollars to the donations text
+//Add an event listener to the update button. once clicked add 10 dollars to the donations text on the display function where the button to be clicked is created on the DOM.
 //use PATCH to persist the change to the database
 
-let donations = document.querySelector("button.donate")
-console.log(donations)
-    donations.addEventListener("click", function(){
-       console.log( document.querySelector(".add"))
-        
-    })
+//PATCH
+
+
+function updater(data){
+    fetch( `http://localhost:3000/animals/${data.id}`,{
+            method: "PATCH",
+            headers:{
+                "Content-type": "application/json",
+                Accept: "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(animalCard => console.log(animalCard))
+}
+
