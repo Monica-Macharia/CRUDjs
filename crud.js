@@ -3,25 +3,24 @@
 //display function that pushes the data to a specific location on the DOM.
 
 
-
-
 function displayFunction(data){
     
     const location = document.querySelector("#data")
+   
+    // console.log(data)
+    // console.log(divi.children[3])
+
+        
+
     let divi = document.createElement("div")
     divi.innerHTML = 
     `<img src = ${data.image}>
     <p class="add">Donations: $${data.donations}</p>
     <p>Name: ${data.name}</p>
     <button class="donate">Donate $30</button>
-    <button>Delete</button>`
-    // console.log(data)
-    // console.log(divi.children[3])
-
-    
+    <button class="delete">Delete</button>`
     
     const newDiv = location.appendChild(divi)
-    // console.log(newDiv)
    
 
     const click = divi.querySelector(".donate")
@@ -39,23 +38,30 @@ function displayFunction(data){
         divi.querySelector(".add").innerText = `Donations: $${data.donations}` 
        updater(data)
         
-        
-            
-        
-
-
-
-
+       
     })
 
+   const deleter = divi.querySelector(".delete")
+deleter.addEventListener("click", function(){ 
     
+   divi.remove()
+    deleteMethod(data.id)
+})
+
+
+    
+    // console.log(newDiv)
+
 }
 
 
+
+
+function getAllAnimals(){
 fetch('http://localhost:3000/animals')
 .then(response => response.json())
 .then(data => data.map(item => displayFunction(item)))
-
+}
 
 
 
@@ -159,3 +165,24 @@ function updater(data){
             .then(animalCard => console.log(animalCard))
 }
 
+
+//DELETE
+//add an event listener to the delete button when its created
+//DELETE method to delete an animal by id.
+
+function deleteMethod(id){
+    fetch("http://localhost:3000/animals/${id}", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(res => res(json))
+    .then(() => console.log( deleted))
+}
+
+//initial render
+function init(){
+    getAllAnimals()
+}
+init();
