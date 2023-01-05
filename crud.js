@@ -12,6 +12,7 @@ function displayFunction(data){
     <button class="donate">Donate $30</button>
     <button>Delete</button>`
     console.log(data)
+    console.log(divi.donate)
 
     let newDiv = location.appendChild(divi)
     console.log(newDiv)
